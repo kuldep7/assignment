@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- BASIC CODE TAKEN https://github.com/bradtraversy/react_step_form -->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link crossorigin  href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+  <title>Assignment</title>
+  <script crossorigin  src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js" integrity="sha256-T/f7Sju1ZfNNfBh7skWn0idlCBcI3RwdLSS4/I7NQKQ=" crossorigin="anonymous"></script>
+</head>
+<body>
+  <noscript>
+    You need to enable JavaScript to run this app.
+  </noscript>
+  <div id="root"></div>
+  <script crossorigin  src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <link crossorigin  rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.21/b-1.6.2/datatables.min.css"/>
+
+  <script crossorigin  type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.21/b-1.6.2/datatables.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js" crossorigin="anonymous"></script>
+  <script>
+    $(document).ready(function() {
+      var table = $('#example').DataTable( {
+        processing: true,
+        serverSide:true,
+        ajax: {url:"https://jsonplaceholder.typicode.com/users",dataSrc:""},
+        columns:[
+        {data:"name"},
+        {data:"email"},
+        {data:"address.street"},
+        {data:"phone"},
+        {
+          data: null,
+          sortable: false,
+          render: function (o) { return '<a class=" m-3 flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-3 rounded" href=/edit/' + o.id + '>' + 'Edit' + '</a>'; }
+        },
+        {
+          data: null,
+          sortable: false,
+          defaultContent: "<button class=' m-3 flex-shrink-0 bg-red-500 hover:bg-red-900 border-red-500 hover:border-red-700 text-sm border-4 text-white py-1 px-3 rounded'>Delete</button>"
+        }
+        ],
+        dom: '<"flex justify-between p-4 flex-wrap"l<"border p-2 rounded" f>><"overflow-auto flex justify-end flex-wrap"p><"flex justify-center items-center"r>t<"overflow-auto flex justify-between p-4 flex-wrap"ip>',
+        lengthChange:true,
+        lengthMenu: [ [100, 250, 500, -1], [100, 250, 500, "All"] ],
+      } );
+
+      $('#example tbody').on( 'click', 'button', function () {
+        var data = table.row( $(this).parents('tr') ).data();
+        console.log(data.id)
+        Swal.fire( {title:'Do you Want to Delete ?',text:"User : "+data.name,showCancelButton:true,allowEscapeKey:false,allowOutsideClick:false }).then(function(res){
+          if(res.value){
+            axios.delete('https://jsonplaceholder.typicode.com/users/'+data.id).then(function(res){
+              Swal.fire({title:'Deleted Successfully',text:res.data.id,icon:'success',allowEscapeKey:false,allowOutsideClick:false,timer:2000,timerProgressBar:true})
+            })
+          }
+        });
+      } );
+    } );
+  </script>
+</body>
+</html>

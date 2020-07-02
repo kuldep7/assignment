@@ -1,0 +1,31 @@
+{
+  "name": "assignment",
+  "version": "1.0.0",
+  "description": "GKMIT React Assignment",
+  "main": "src/index.js",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "react": "next",
+    "react-data-table-component": "^6.9.3",
+    "react-dom": "next",
+    "react-hooks-helper": "next",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "2.0.3",
+    "sweetalert2": "^9.15.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "author": "Kuldeep Suthar",
+  "license": "MIT"
+}
