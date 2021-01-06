@@ -4,7 +4,7 @@
   "description": "GKMIT React Assignment",
   "main": "src/index.js",
   "dependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "react": "next",
     "react-data-table-component": "^6.9.3",
     "react-dom": "next",
